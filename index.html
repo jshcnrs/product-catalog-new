@@ -1,23 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Product Catalog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a30;
+      --text:#e8eefc;
+      --muted:#a8b3cf;
+      --border:rgba(255,255,255,.10);
+      --accent:#4f8cff;
     }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(900px 500px at 10% -10%, rgba(79,140,255,.25), transparent 60%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(0,214,170,.18), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit}
+    .wrap{max-width:1100px; margin:0 auto; padding:24px;}
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding:14px 18px;
+      border:1px solid var(--border);
+      background:rgba(15,26,48,.65);
+      backdrop-filter: blur(10px);
+      border-radius:16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; min-width:0;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      background: linear-gradient(135deg, var(--accent), #00d6aa);
+      display:grid; place-items:center; font-weight:800; color:#071021;
+    }
+    .brand h1{
+      font-size:16px; margin:0; line-height:1.2;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .brand p{margin:2px 0 0; font-size:12px; color:var(--muted)}
+    .actions{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+      font-size:13px;
+      color:var(--text);
+    }
+    .btn.primary{
+      background: rgba(79,140,255,.18);
+      border-color: rgba(79,140,255,.45);
+    }
+    .hero{
+      margin-top:18px;
+      padding:18px;
+      border:1px solid var(--border);
+      background:rgba(15,26,48,.55);
+      backdrop-filter: blur(10px);
+      border-radius:16px;
+    }
+    .hero h2{margin:0 0 6px; font-size:18px}
+    .hero .meta{color:var(--muted); font-size:13px; margin:0}
+    .pdf-card{
+      margin-top:18px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      overflow:hidden;
+      background: rgba(15,26,48,.45);
+    }
+    .pdf-top{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+    }
+    .pdf-top .title{font-size:13px; color:var(--muted)}
+    .pdf-frame{
+      width:100%;
+      height:75vh;   /* change this if you want taller/shorter */
+      border:0;
+      background:#0a0f1c;
+    }
+    footer{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+      padding-bottom:10px;
+    }
+    @media (max-width:560px){
+      .pdf-frame{height:70vh;}
+      header{padding:12px}
     }
   </style>
 </head>
 <body>
-  <iframe src="products.pdf"></iframe>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">P</div>
+        <div>
+          <h1>Product Catalog</h1>
+          <p>View, download, and share our catalog</p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="btn" href="products.pdf" target="_blank" rel="noopener">Open PDF</a>
+        <a class="btn primary" href="products.pdf" download>Download</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h2>Catalog</h2>
+      <p class="meta">If the PDF preview doesn’t load on a device, use “Open PDF” or “Download”.</p>
+    </section>
+
+    <section class="pdf-card">
+      <div class="pdf-top">
+        <div class="title">Embedded preview</div>
+        <div class="title">File: products.pdf</div>
+      </div>
+      <iframe class="pdf-frame" src="products.pdf#view=FitH"></iframe>
+    </section>
+
+    <footer>
+      © <span id="y"></span> Your Company • Hosted on GitHub Pages
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
